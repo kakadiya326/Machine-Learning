@@ -1,137 +1,143 @@
-3️⃣ Multiclass Logistic Regression (Softmax)
+# Multiclass Logistic Regression (Softmax)
 
-Binary logistic regression:
-
-Classes = 2
+Binary Logistic Regression works when the number of classes is **2**.
 
 Example:
 
-Spam / Not Spam
+| Email         | Class    |
+| ------------- | -------- |
+| Email message | Spam     |
+| Email message | Not Spam |
 
-But sometimes we have more than 2 classes.
+But many real-world problems contain **more than two classes**.
 
 Example:
 
-Image	Class
-🐱	Cat
-🐶	Dog
-🐦	Bird
+| Image | Class |
+| ----- | ----- |
+| 🐱     | Cat   |
+| 🐶     | Dog   |
+| 🐦     | Bird  |
 
-This requires Multiclass Logistic Regression.
+To solve this, we use **Multiclass Logistic Regression**, which uses the **Softmax Function**.
 
-Softmax Function
+---
 
-Softmax converts scores into probabilities.
+# Softmax Function
+
+Softmax converts **model scores into probabilities**.
 
 Formula:
 
-𝑃
-(
-𝑐
-𝑙
-𝑎
-𝑠
-𝑠
-𝑖
-)
-=
-𝑒
-𝑧
-𝑖
-∑
-𝑗
-=
-1
-𝑘
-𝑒
-𝑧
-𝑗
-P(class
-i
-	​
+$$
+P(class_i) =
+\frac{e^{z_i}}{\sum_{j=1}^{k} e^{z_j}}
+$$
 
-)=
-∑
-j=1
-k
-	​
+Where:
 
-e
-z
-j
-	​
+- **k** = number of classes  
+- **zᵢ** = score for class *i*
 
-e
-z
-i
-	​
+---
 
-	​
+# Example Calculation
 
+Suppose the model outputs these **scores**:
 
-Where
+| Class | Score |
+| ----- | ----- |
+| Cat   | 2.0   |
+| Dog   | 1.0   |
+| Bird  | 0.1   |
 
-k = number of classes
-Example Calculation
+---
 
-Suppose model outputs scores:
+## Step 1 — Exponentiation
 
-Cat = 2.0
-Dog = 1.0
-Bird = 0.1
+$$
+e^{2} = 7.39
+$$
 
-Step 1 — Exponent
+$$
+e^{1} = 2.71
+$$
 
-e² = 7.39
-e¹ = 2.71
-e⁰·¹ = 1.10
+$$
+e^{0.1} = 1.10
+$$
 
-Step 2 — Sum
+---
 
+## Step 2 — Sum of Exponents
+
+$$
 7.39 + 2.71 + 1.10 = 11.20
+$$
 
-Step 3 — Probabilities
+---
 
-Cat:
+## Step 3 — Convert to Probabilities
 
-7.39 / 11.20 = 0.66
+### Cat
 
-Dog:
+$$
+P(Cat) = \frac{7.39}{11.20} = 0.66
+$$
 
-2.71 / 11.20 = 0.24
+### Dog
 
-Bird:
+$$
+P(Dog) = \frac{2.71}{11.20} = 0.24
+$$
 
-1.10 / 11.20 = 0.10
+### Bird
 
-Final prediction:
+$$
+P(Bird) = \frac{1.10}{11.20} = 0.10
+$$
 
-Cat (highest probability)
-Why Softmax is useful
+---
+
+# Final Prediction
+
+| Class | Probability |
+| ----- | ----------- |
+| Cat   | 0.66        |
+| Dog   | 0.24        |
+| Bird  | 0.10        |
+
+Final predicted class:
+
+**Cat** (highest probability)
+
+---
+
+# Why Softmax is Useful
 
 Softmax ensures:
 
-All probabilities between 0 and 1
-Sum of probabilities = 1
+- All probabilities are between **0 and 1**
+- The **sum of probabilities = 1**
 
 Example:
 
-Cat = 0.66
-Dog = 0.24
-Bird = 0.10
+| Class | Probability |
+| ----- | ----------- |
+| Cat   | 0.66        |
+| Dog   | 0.24        |
+| Bird  | 0.10        |
 
 Total:
 
-1.00
+$$
+0.66 + 0.24 + 0.10 = 1.00
+$$
 
-Perfect probability distribution.
+This creates a **perfect probability distribution**.
 
-🔑 Final Big Picture
+---
 
-Binary Logistic Regression:
+# Final Big Picture
 
-Linear model → Sigmoid → Probability → Class
-
-Multiclass Logistic Regression:
-
-Linear model → Softmax → Probability of each class → Choose highest
+## Binary Logistic Regression

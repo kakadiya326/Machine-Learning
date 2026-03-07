@@ -1,527 +1,216 @@
-Multiple Linear Regression (MLR)
-4
-1️⃣ What is Multiple Linear Regression?
+# Multiple Linear Regression (MLR)
 
-Multiple Linear Regression is an extension of Simple Linear Regression.
+## 1. What is Multiple Linear Regression?
 
-👉 Instead of using one input feature, it uses two or more features to predict a continuous value.
+Multiple Linear Regression is an extension of **Simple Linear Regression**.
 
-Simple Linear Regression:
-𝑌
-=
-𝛽
-0
-+
-𝛽
-1
-𝑋
-Y=β
-0
-	​
+Instead of using **one input feature**, it uses **two or more features** to predict a **continuous value**.
 
-+β
-1
-	​
+### Simple Linear Regression
 
-X
-Multiple Linear Regression:
-𝑌
-^
-=
-𝛽
-0
-+
-𝛽
-1
-𝑋
-1
-+
-𝛽
-2
-𝑋
-2
-+
-𝛽
-3
-𝑋
-3
-+
-⋯
-+
-𝛽
-𝑛
-𝑋
-𝑛
-Y
-^
-=β
-0
-	​
+$$
+Y = \beta_0 + \beta_1 X
+$$
 
-+β
-1
-	​
+### Multiple Linear Regression
 
-X
-1
-	​
+$$
+\hat{Y} = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 + \dots + \beta_n X_n
+$$
 
-+β
-2
-	​
+---
 
-X
-2
-	​
+# 2. Why Do We Need Multiple Linear Regression?
 
-+β
-3
-	​
+In real life, output depends on **many factors**, not just one.
 
-X
-3
-	​
+### Example: House Price Prediction
 
-+⋯+β
-n
-	​
-
-X
-n
-	​
-
-2️⃣ Why do we need Multiple Linear Regression?
-
-In real life, output depends on many factors, not just one.
-
-Example: House Price Prediction
-Size (X₁)	Bedrooms (X₂)	Age (X₃)	Price (Y)
-1000	2	5	20L
-1500	3	2	30L
+| Size (X₁) | Bedrooms (X₂) | Age (X₃) | Price (Y) |
+| --------- | ------------- | -------- | --------- |
+| 1000      | 2             | 5        | 20L       |
+| 1500      | 3             | 2        | 30L       |
 
 Price depends on:
 
-Size
+- Size
+- Bedrooms
+- Age
 
-Bedrooms
+So we use **Multiple Linear Regression**.
 
-Age
+---
 
-So we use Multiple Linear Regression.
+# 3. Terminology (Must Know)
 
-3️⃣ Terminology (Must Know)
-Symbol	Meaning
+| Symbol                  | Meaning                                |
+| ----------------------- | -------------------------------------- |
+| $X_1, X_2, ..., X_n$    | Independent variables (features)       |
+| $Y$                     | Actual value                           |
+| $\hat{Y}$               | Predicted value                        |
+| $\beta_0$               | Intercept                              |
+| $\beta_1, \beta_2, ...$ | Coefficients (slopes for each feature) |
+| Residual                | $Y - \hat{Y}$                          |
+| Cost Function           | Total model error                      |
 
-𝑋
-1
-,
-𝑋
-2
-,
-…
-𝑋
-𝑛
-X
-1
-	​
+---
 
-,X
-2
-	​
+# 4. Model Equation Explained
 
-,…X
-n
-	​
+$$
+\hat{Y} = \beta_0 + \beta_1 X_1 + \beta_2 X_2
+$$
 
-	Independent variables (features)
+### Example
 
-𝑌
-Y	Actual value
-
-𝑌
-^
-Y
-^
-	Predicted value
-
-𝛽
-0
-β
-0
-	​
-
-	Intercept
-
-𝛽
-1
-,
-𝛽
-2
-…
-β
-1
-	​
-
-,β
-2
-	​
-
-…	Coefficients (slopes for each feature)
-Residual	
-𝑌
-−
-𝑌
-^
-Y−
-Y
-^
-
-Cost Function	Total model error
-4️⃣ Model Equation Explained
-𝑌
-^
-=
-𝛽
-0
-+
-𝛽
-1
-𝑋
-1
-+
-𝛽
-2
-𝑋
-2
-Y
-^
-=β
-0
-	​
-
-+β
-1
-	​
-
-X
-1
-	​
-
-+β
-2
-	​
-
-X
-2
-	​
-
-Suppose:
-𝑃
-𝑟
-𝑖
-𝑐
-𝑒
-^
-=
-5
-+
-2
-(
-𝑆
-𝑖
-𝑧
-𝑒
-)
-+
-3
-(
-𝐵
-𝑒
-𝑑
-𝑟
-𝑜
-𝑜
-𝑚
-𝑠
-)
-Price
-^
-=5+2(Size)+3(Bedrooms)
+$$
+\hat{Price} = 5 + 2(Size) + 3(Bedrooms)
+$$
 
 For:
-Size = 1000, Bedrooms = 2
 
-𝑌
-^
-=
-5
-+
-2
-(
-1000
-)
-+
-3
-(
-2
-)
-Y
-^
-=5+2(1000)+3(2)
-𝑌
-^
-=
-5
-+
-2000
-+
-6
-=
-2011
-Y
-^
-=5+2000+6=2011
+Size = 1000  
+Bedrooms = 2
 
-Each feature contributes separately.
+$$
+\hat{Y} = 5 + 2(1000) + 3(2)
+$$
 
-5️⃣ Matrix Form (Very Important)
+$$
+\hat{Y} = 5 + 2000 + 6 = 2011
+$$
 
-Sklearn internally uses matrix equation:
+Each feature contributes **separately**.
 
-𝑌
-^
-=
-𝑋
-𝛽
-Y
-^
-=Xβ
+---
+
+# 5. Matrix Form (Very Important)
+
+Scikit-learn internally uses **matrix notation**:
+
+$$
+\hat{Y} = X\beta
+$$
 
 Where:
 
-𝑋
-=
-[
-1
-	
-𝑋
-1
-	
-𝑋
-2
+$$
+X =
+\begin{bmatrix}
+1 & X_1 & X_2 \\
+1 & X_1 & X_2
+\end{bmatrix}
+$$
 
+$$
+\beta =
+\begin{bmatrix}
+\beta_0 \\
+\beta_1 \\
+\beta_2
+\end{bmatrix}
+$$
 
-1
-	
-𝑋
-1
-	
-𝑋
-2
-]
-X=[
-1
-1
-	​
+---
 
-X
-1
-	​
+# 6. How Model Finds Coefficients
 
-X
-1
-	​
+Using the **Normal Equation**:
 
-	​
-
-X
-2
-	​
-
-X
-2
-	​
-
-	​
-
-]
-𝛽
-=
-[
-𝛽
-0
-
-
-𝛽
-1
-
-
-𝛽
-2
-]
-β=
-	​
-
-β
-0
-	​
-
-β
-1
-	​
-
-β
-2
-	​
-
-	​
-
-	​
-
-6️⃣ How Model Finds Coefficients?
-
-Using Normal Equation:
-
-𝛽
-=
-(
-𝑋
-𝑇
-𝑋
-)
-−
-1
-𝑋
-𝑇
-𝑌
-β=(X
-T
-X)
-−1
-X
-T
-Y
+$$
+\beta = (X^T X)^{-1} X^T Y
+$$
 
 This computes:
 
-intercept
+- intercept
+- all coefficients together
 
-all coefficients together
+That is why **scikit-learn returns**
 
-This is why sklearn gives:
 
 coef_ = [β1, β2, β3]
 intercept_ = β0
-7️⃣ Cost Function (Same as Simple Regression)
 
-We still minimize Mean Squared Error:
 
-𝑀
-𝑆
-𝐸
-=
-1
-𝑛
-∑
-(
-𝑌
-−
-𝑌
-^
-)
-2
-MSE=
-n
-1
-	​
+---
 
-∑(Y−
-Y
-^
-)
-2
+# 7. Cost Function (Same as Simple Regression)
+
+We minimize **Mean Squared Error (MSE)**.
+
+$$
+MSE = \frac{1}{n} \sum (Y - \hat{Y})^2
+$$
 
 Goal:
-➡ Find β values that minimize total error.
 
-8️⃣ Geometry Interpretation
+Find **β values** that minimize the total error.
 
-Simple regression → fits a line
+---
 
-Multiple regression → fits a plane (or hyperplane)
+# 8. Geometry Interpretation
+
+Simple Regression → **Line**
+
+Multiple Regression → **Plane or Hyperplane**
 
 Example:
 
-1 feature → Line
+| Features    | Shape      |
+| ----------- | ---------- |
+| 1 feature   | Line       |
+| 2 features  | Plane      |
+| 3+ features | Hyperplane |
 
-2 features → Plane
+---
 
-3+ features → Hyperplane
+# 9. Assumptions of Multiple Linear Regression
 
-9️⃣ Assumptions of Multiple Linear Regression
+Important for interviews.
 
-These are very important for interviews.
+1. Linear relationship
+2. No multicollinearity
+3. Homoscedasticity (constant variance)
+4. Independent residuals
+5. Normally distributed errors
 
-1️⃣ Linear relationship
-2️⃣ No multicollinearity (features should not depend on each other)
-3️⃣ Homoscedasticity (constant variance)
-4️⃣ Residuals should be independent
-5️⃣ Normally distributed errors
+---
 
-🔟 Multicollinearity (Common Problem)
+# 10. Multicollinearity (Common Problem)
 
 If features are strongly related:
 
 Example:
 
-Size in sq.ft
+- Size in **square feet**
+- Size in **square meters**
 
-Size in sq.meters
+The model becomes **confused**, causing unstable coefficients.
 
-Model gets confused.
+---
 
-This causes unstable coefficients.
-
-1️⃣1️⃣ Output Interpretation (Sklearn)
+# 11. Output Interpretation (Scikit-learn)
 
 Example:
-
 model.coef_ = [2.1, -0.5, 3.2]
 model.intercept_ = 4
 
-Means:
-
-𝑌
-=
-4
-+
-2.1
-𝑋
-1
-−
-0.5
-𝑋
-2
-+
-3.2
-𝑋
-3
-Y=4+2.1X
-1
-	​
-
-−0.5X
-2
-	​
-
-+3.2X
-3
-	​
 
 
-Each feature has its own slope.
+Model equation becomes:
 
-1️⃣2️⃣ Example Code (Python)
+$$
+Y = 4 + 2.1X_1 - 0.5X_2 + 3.2X_3
+$$
+
+Each feature has **its own slope**.
+
+---
+
+# 12. Example Code (Python)
+
+```python
 from sklearn.linear_model import LinearRegression
 
 X = [
@@ -538,91 +227,5 @@ model.fit(X,Y)
 print("Intercept:", model.intercept_)
 print("Coefficients:", model.coef_)
 
-Prediction:
-
+# Prediction
 model.predict([[1800,3]])
-1️⃣3️⃣ Difference: Simple vs Multiple Regression
-Feature	Simple	Multiple
-No. of Inputs	1	2+
-Graph	Line	Plane
-Equation	
-𝛽
-0
-+
-𝛽
-1
-𝑋
-β
-0
-	​
-
-+β
-1
-	​
-
-X	
-𝛽
-0
-+
-𝛽
-1
-𝑋
-1
-+
-𝛽
-2
-𝑋
-2
-β
-0
-	​
-
-+β
-1
-	​
-
-X
-1
-	​
-
-+β
-2
-	​
-
-X
-2
-	​
-
-
-Real-world use	Limited	Practical
-Complexity	Low	Higher
-1️⃣4️⃣ Advantages
-
-✅ Works with real-world data
-✅ Captures multiple influences
-✅ Easy to interpret
-✅ Fast training
-
-1️⃣5️⃣ Limitations
-
-❌ Cannot model non-linear patterns
-❌ Sensitive to correlated features
-❌ Needs feature scaling sometimes
-
-1️⃣6️⃣ Real-Life Applications
-
-Used in:
-
-House price prediction
-
-Sales forecasting
-
-Medical risk prediction
-
-Demand prediction
-
-Financial modeling
-
-1️⃣7️⃣ Interview One-Line Answer
-
-Multiple Linear Regression is a supervised learning algorithm used to predict a continuous outcome using two or more independent variables by fitting a hyperplane that minimizes the squared error between actual and predicted values.
