@@ -6,7 +6,7 @@ This repository contains structured notes on **Machine Learning concepts, models
 
 ## Introduction to Machine Learning
 
-- [What is Machine Learning?](ML01.md)
+- [What is Machine Learning?](./ReadmeFile/ML01.md)
 
 ---
 
